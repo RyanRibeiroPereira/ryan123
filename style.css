@@ -1,0 +1,1213 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #03040a;
+    color: #eee;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+button {
+    font-family: inherit;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================
+   MENU
+===================================== */
+
+#mainMenu {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            rgba(91, 113, 171, 0.30),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 50% 100%,
+            #15182a 0%,
+            #05060d 55%,
+            #010207 100%
+        );
+}
+
+
+/* luz central */
+
+#mainMenu::before {
+    content: "";
+
+    position: absolute;
+
+    top: -30%;
+    left: 50%;
+
+    width: 400px;
+    height: 1000px;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.16),
+            rgba(126,158,219,0.08),
+            transparent
+        );
+
+    filter: blur(35px);
+
+    opacity: 0.7;
+}
+
+
+/* cavernas */
+
+#mainMenu::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+
+        radial-gradient(
+            ellipse at 10% 100%,
+            #17192b 0 12%,
+            transparent 13%
+        ),
+
+        radial-gradient(
+            ellipse at 25% 100%,
+            #111326 0 15%,
+            transparent 16%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 100%,
+            #111326 0 16%,
+            transparent 17%
+        ),
+
+        radial-gradient(
+            ellipse at 95% 100%,
+            #17192b 0 13%,
+            transparent 14%
+        );
+
+    opacity: 0.8;
+}
+
+
+/* neblina */
+
+.menuFog {
+    position: absolute;
+
+    width: 600px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(115, 133, 176, 0.12);
+
+    filter: blur(45px);
+
+    animation: fogMove 12s infinite alternate ease-in-out;
+}
+
+.fog1 {
+    left: -150px;
+    bottom: 100px;
+}
+
+.fog2 {
+    right: -180px;
+    bottom: 170px;
+
+    animation-delay: -5s;
+}
+
+@keyframes fogMove {
+
+    from {
+        transform: translateX(-40px);
+    }
+
+    to {
+        transform: translateX(70px);
+    }
+
+}
+
+
+/* conteúdo */
+
+.menuContent {
+    position: relative;
+    z-index: 5;
+
+    width: min(700px, 90vw);
+
+    text-align: center;
+
+    animation: menuAppear 2s ease;
+}
+
+@keyframes menuAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* símbolo */
+
+.smallLogo {
+    font-size: 48px;
+
+    color: #d9e3ff;
+
+    text-shadow:
+        0 0 10px #8ba9ff,
+        0 0 30px #5977c9;
+
+    margin-bottom: 5px;
+}
+
+
+/* título */
+
+.menuContent h1 {
+    font-size: clamp(42px, 7vw, 80px);
+
+    letter-spacing: 8px;
+
+    color: #f1f3ff;
+
+    font-weight: normal;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 20px #8293c7,
+        0 5px 25px #000;
+
+    margin-bottom: 10px;
+}
+
+
+/* ornamento */
+
+.ornament {
+    color: #d7dff6;
+
+    font-size: 18px;
+
+    letter-spacing: 4px;
+
+    margin: 5px 0 18px;
+}
+
+
+.subtitle {
+    color: #aeb8d4;
+
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 45px;
+}
+
+
+/* botões */
+
+.menuButtons {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.menuButtons button {
+    position: relative;
+
+    width: 320px;
+
+    padding: 13px 15px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #d9dce7;
+
+    font-size: 18px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s,
+        transform 0.2s,
+        text-shadow 0.2s;
+}
+
+.menuButtons button:hover {
+    color: white;
+
+    transform: scale(1.05);
+
+    text-shadow:
+        0 0 8px white,
+        0 0 20px #7d98e9;
+}
+
+.menuButtons button::before {
+    content: "";
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(160,180,230,0.35),
+            transparent
+        );
+
+    opacity: 0;
+
+    transition: 0.2s;
+}
+
+.menuButtons button:hover::before {
+    opacity: 1;
+}
+
+
+.menuBottom {
+    position: absolute;
+
+    top: calc(100vh - 70px);
+
+    left: 0;
+    right: 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #65708e;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================
+   JOGO
+===================================== */
+
+#gameScreen {
+    position: fixed;
+    inset: 0;
+
+    background: #03040a;
+}
+
+
+#gameCanvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    image-rendering: pixelated;
+
+    cursor: crosshair;
+}
+
+
+/* =====================================
+   HUD
+===================================== */
+
+#hud {
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+.playerIcon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0 30%,
+            #cbd3e8 31% 55%,
+            #33384c 56% 65%,
+            transparent 66%
+        );
+
+    color: #171923;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.2);
+}
+
+
+.bars {
+    width: 220px;
+}
+
+
+.healthBar,
+.manaBar,
+.xpBar {
+    height: 8px;
+
+    margin: 4px 0;
+
+    background: #151827;
+
+    border: 1px solid #424b6b;
+
+    overflow: hidden;
+}
+
+
+.healthBar {
+    height: 13px;
+}
+
+
+#healthFill {
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6e101c,
+            #d93648
+        );
+
+    transition: width 0.2s;
+}
+
+
+#manaFill {
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #193b7e,
+            #5f9cff
+        );
+
+    transition: width 0.2s;
+}
+
+
+#xpFill {
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #75611b,
+            #d9b94e
+        );
+}
+
+
+.hudInfo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    color: #c9d1e7;
+
+    font-size: 13px;
+}
+
+
+.coinCounter {
+    margin-left: 12px;
+
+    color: #e8d47a;
+
+    font-size: 17px;
+
+    text-shadow:
+        0 0 8px rgba(240,205,75,0.4);
+}
+
+
+/* =====================================
+   NOME DO LOCAL
+===================================== */
+
+#areaName {
+    position: absolute;
+
+    top: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #d6dcf2;
+
+    font-size: 18px;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 10px #7184b8;
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   CONTROLES
+===================================== */
+
+#controlsHelp {
+    position: absolute;
+
+    bottom: 12px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 8px 14px;
+
+    background: rgba(3,5,12,0.75);
+
+    border: 1px solid #3a4565;
+
+    color: #9da9c7;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    line-height: 17px;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   MENSAGEM
+===================================== */
+
+#messageBox {
+    position: absolute;
+
+    left: 50%;
+    bottom: 100px;
+
+    transform: translateX(-50%);
+
+    min-width: 250px;
+
+    padding: 10px 20px;
+
+    text-align: center;
+
+    color: #e6eaff;
+
+    background: rgba(5,8,18,0.85);
+
+    border: 1px solid #53658f;
+
+    opacity: 0;
+
+    transition: opacity 0.3s;
+
+    pointer-events: none;
+}
+
+
+/* =====================================
+   PAINÉIS
+===================================== */
+
+.panel {
+    position: absolute;
+
+    z-index: 50;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(750px, 90vw);
+
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,23,40,0.98),
+            rgba(5,7,15,0.98)
+        );
+
+    border: 1px solid #52658d;
+
+    box-shadow:
+        0 0 50px rgba(0,0,0,0.8),
+        inset 0 0 40px rgba(90,110,160,0.06);
+}
+
+
+.panelHeader {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #343d59;
+
+    padding-bottom: 12px;
+}
+
+
+.panelHeader h2 {
+    font-size: 25px;
+
+    letter-spacing: 4px;
+
+    font-weight: normal;
+}
+
+
+.panelHeader button {
+    border: none;
+
+    background: transparent;
+
+    color: #aab4ce;
+
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+
+.panelDescription {
+    color: #8f9ab6;
+
+    margin-bottom: 20px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================
+   ITENS
+===================================== */
+
+.itemGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(140px, 1fr));
+
+    gap: 10px;
+}
+
+
+.item {
+    min-height: 100px;
+
+    padding: 12px;
+
+    background: #0b0f1c;
+
+    border: 1px solid #303a56;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.item:hover {
+    transform: translateY(-3px);
+
+    border-color: #7289bd;
+
+    background: #11172a;
+}
+
+
+.itemIcon {
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+
+.itemName {
+    font-size: 13px;
+
+    color: #dce1f2;
+}
+
+
+.itemDescription {
+    margin-top: 5px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 10px;
+
+    color: #7f8ba8;
+}
+
+
+/* =====================================
+   LOJA
+===================================== */
+
+.shopCoins {
+    color: #e5d06d;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+
+.shopItem {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px;
+
+    margin: 8px 0;
+
+    background: #0b0f1c;
+
+    border: 1px solid #303a56;
+}
+
+
+.shopItemInfo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.shopItem button,
+.largeButton,
+.modalBox button {
+    border: 1px solid #5c6d96;
+
+    background: #11182a;
+
+    color: #dce2f4;
+
+    padding: 10px 18px;
+
+    cursor: pointer;
+}
+
+
+.shopItem button:hover,
+.largeButton:hover,
+.modalBox button:hover {
+    background: #273451;
+
+    border-color: #9baedb;
+}
+
+
+/* =====================================
+   QUESTS
+===================================== */
+
+.quest {
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    background: #0b0f1c;
+
+    border: 1px solid #303a56;
+}
+
+
+.quest h3 {
+    color: #dbe2f5;
+
+    margin-bottom: 7px;
+}
+
+
+.quest p {
+    color: #8792ae;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.quest.complete {
+    border-color: #9a8243;
+
+    background: #15140e;
+}
+
+
+/* =====================================
+   MODAIS
+===================================== */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0,0,0,0.75);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.modalBox {
+    width: min(550px, 90vw);
+
+    padding: 35px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #131a2b,
+            #05070e
+        );
+
+    border: 1px solid #52658d;
+
+    box-shadow:
+        0 0 70px rgba(0,0,0,0.8);
+}
+
+
+.modalBox h2 {
+    font-size: 30px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+
+.modalBox p {
+    color: #9ba6c1;
+
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+}
+
+
+.modalBox input {
+    width: 100%;
+
+    margin-bottom: 25px;
+}
+
+
+.achievement {
+    text-align: left;
+
+    padding: 15px;
+
+    margin: 8px 0;
+
+    background: #0b0f1a;
+
+    border: 1px solid #303a56;
+}
+
+
+.achievement small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #7f8aa5;
+}
+
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media (max-width: 700px) {
+
+    .menuContent h1 {
+        font-size: 35px;
+
+        letter-spacing: 4px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+
+        letter-spacing: 3px;
+    }
+
+    .menuButtons button {
+        width: 280px;
+
+        font-size: 15px;
+    }
+
+    #hud {
+        left: 10px;
+        top: 10px;
+    }
+
+    .playerIcon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .bars {
+        width: 130px;
+    }
+
+    #areaName {
+        font-size: 12px;
+    }
+
+    #controlsHelp {
+        display: none;
+    }
+
+}
+/* ============================= */
+/* CONFIGURAÇÃO DE TECLAS */
+/* ============================= */
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(50, 65, 110, 0.35),
+            rgba(0, 0, 0, 0.96) 70%
+        );
+
+    z-index: 9999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.settings-box {
+    width: min(700px, 90%);
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 19, 32, 0.98),
+            rgba(4, 6, 12, 0.98)
+        );
+
+    border: 1px solid #6d7695;
+
+    box-shadow:
+        0 0 40px rgba(100, 120, 180, 0.15),
+        inset 0 0 40px rgba(255, 255, 255, 0.02);
+
+    text-align: center;
+}
+
+.settings-box h1 {
+    margin: 0 0 8px;
+
+    color: #eee;
+
+    font-family: Georgia, serif;
+
+    font-size: 30px;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,.5);
+}
+
+.settings-subtitle {
+    color: #8f96aa;
+
+    margin-bottom: 25px;
+
+    font-size: 14px;
+}
+
+/* LISTA */
+
+#keyList {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    max-height: 420px;
+
+    overflow-y: auto;
+
+    padding-right: 5px;
+}
+
+.key-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 12px 16px;
+
+    background: rgba(255,255,255,0.035);
+
+    border: 1px solid rgba(130,140,170,0.25);
+
+    transition: .2s;
+}
+
+.key-row:hover {
+    background: rgba(120,140,190,0.1);
+
+    border-color: rgba(160,170,210,0.5);
+}
+
+.key-name {
+    color: #ddd;
+
+    font-size: 16px;
+}
+
+.key-button {
+    min-width: 110px;
+
+    padding: 8px 15px;
+
+    color: #fff;
+
+    background: #111522;
+
+    border: 1px solid #727b99;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: .2s;
+}
+
+.key-button:hover {
+    background: #252d45;
+
+    box-shadow: 0 0 12px rgba(130,150,220,.3);
+}
+
+.key-button.waiting {
+    color: #fff;
+
+    background: #5b2630;
+
+    border-color: #c86a78;
+
+    animation: waitingKey 1s infinite;
+}
+
+@keyframes waitingKey {
+
+    0%,100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+}
+
+/* BOTÕES */
+
+.settings-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.settings-buttons button,
+#openControls {
+    padding: 12px 25px;
+
+    color: #ddd;
+
+    background: transparent;
+
+    border: 1px solid #747d9a;
+
+    cursor: pointer;
+
+    font-family: Georgia, serif;
+
+    letter-spacing: 1px;
+
+    transition: .25s;
+}
+
+.settings-buttons button:hover,
+#openControls:hover {
+    color: white;
+
+    background: rgba(120,140,190,.12);
+
+    border-color: white;
+
+    box-shadow:
+        0 0 15px rgba(130,150,220,.25);
+
+    transform: scale(1.03);
+}
+
+/* SCROLL */
+
+#keyList::-webkit-scrollbar {
+    width: 5px;
+}
+
+#keyList::-webkit-scrollbar-track {
+    background: #080a10;
+}
+
+#keyList::-webkit-scrollbar-thumb {
+    background: #555e78;
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ecos de Aether</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     MENU PRINCIPAL
+========================= -->
+
+<div id="mainMenu" class="screen">
+
+    <div class="menuFog fog1"></div>
+    <div class="menuFog fog2"></div>
+
+    <div class="menuContent">
+
+        <div class="smallLogo">✦</div>
+
+        <h1>ECOS DE AETHER</h1>
+
+        <div class="ornament">
+            ─────── ✦ ───────
+        </div>
+
+        <p class="subtitle">
+            UMA AVENTURA NAS PROFUNDEZAS
+        </p>
+
+        <div class="menuButtons">
+
+            <button onclick="startGame()">
+                ◈ &nbsp; INICIAR AVENTURA
+            </button>
+
+            <button onclick="openOptions()">
+                ⚙ &nbsp; OPÇÕES
+            </button>
+
+            <button onclick="openAchievements()">
+                ✧ &nbsp; CONQUISTAS
+            </button>
+
+            <button onclick="openCredits()">
+                ❖ &nbsp; EXTRAS
+            </button>
+            <button id="openControls">CONTROLES</button>
+
+        </div>
+
+        <div class="menuBottom">
+            <span>ECOS DE AETHER</span>
+            <span>VERSÃO 1.0</span>
+        </div>
+
+    </div>
+</div>
+
+<!-- MENU DE CONFIGURAÇÃO DE TECLAS -->
+<div id="controlsMenu" class="screen hidden">
+
+    <div class="settings-box">
+
+        <h1>CONFIGURAR TECLAS</h1>
+
+        <p class="settings-subtitle">
+            Clique em uma ação e pressione a tecla desejada
+        </p>
+
+        <div id="keyList"></div>
+
+        <div class="settings-buttons">
+            <button id="resetKeys">RESTAURAR PADRÃO</button>
+            <button id="closeControls">VOLTAR</button>
+        </div>
+
+    </div>
+
+</div>
+<!-- =========================
+     TELA DO JOGO
+========================= -->
+
+<div id="gameScreen" class="hidden">
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+
+    <div id="hud">
+
+        <div class="playerIcon">
+            ☠
+        </div>
+
+        <div class="bars">
+
+            <div class="healthBar">
+                <div id="healthFill"></div>
+            </div>
+
+            <div class="manaBar">
+                <div id="manaFill"></div>
+            </div>
+
+            <div class="xpBar">
+                <div id="xpFill"></div>
+            </div>
+
+        </div>
+
+        <div class="hudInfo">
+
+            <div>
+                ❤️ <span id="healthText">100</span>
+            </div>
+
+            <div>
+                💙 <span id="manaText">100</span>
+            </div>
+
+            <div>
+                ✦ LV <span id="levelText">1</span>
+            </div>
+
+        </div>
+
+        <div class="coinCounter">
+            💎 <span id="coinText">0</span>
+        </div>
+
+    </div>
+
+
+    <!-- NOME DO MAPA -->
+
+    <div id="areaName">
+        VILA DO AETHER
+    </div>
+
+
+    <!-- CONTROLES -->
+
+    <div id="controlsHelp">
+
+        A/D ou ←/→ mover<br>
+        W / ↑ pular<br>
+        Clique atacar<br>
+        1 Bola de Fogo<br>
+        2 Raio<br>
+        Espaço Dash<br>
+        E interagir<br>
+        I inventário
+
+    </div>
+
+
+    <!-- MENSAGENS -->
+
+    <div id="messageBox"></div>
+
+
+    <!-- MENU DE INVENTÁRIO -->
+
+    <div id="inventoryPanel" class="panel hidden">
+
+        <div class="panelHeader">
+            <h2>INVENTÁRIO</h2>
+            <button onclick="closePanels()">×</button>
+        </div>
+
+        <div id="inventoryItems" class="itemGrid"></div>
+
+    </div>
+
+
+    <!-- MENU DE AMULETOS -->
+
+    <div id="amuletPanel" class="panel hidden">
+
+        <div class="panelHeader">
+            <h2>AMULETOS</h2>
+            <button onclick="closePanels()">×</button>
+        </div>
+
+        <p class="panelDescription">
+            Encontre amuletos escondidos, derrote chefes
+            e complete missões para desbloquear poderes.
+        </p>
+
+        <div id="amuletItems" class="itemGrid"></div>
+
+    </div>
+
+
+    <!-- LOJA -->
+
+    <div id="shopPanel" class="panel hidden">
+
+        <div class="panelHeader">
+            <h2>LOJA DO VIAJANTE</h2>
+            <button onclick="closePanels()">×</button>
+        </div>
+
+        <div class="shopCoins">
+            💎 <span id="shopCoins">0</span>
+        </div>
+
+        <div id="shopItems"></div>
+
+    </div>
+
+
+    <!-- MISSÕES -->
+
+    <div id="questPanel" class="panel hidden">
+
+        <div class="panelHeader">
+            <h2>MISSÕES</h2>
+            <button onclick="closePanels()">×</button>
+        </div>
+
+        <div id="questList"></div>
+
+    </div>
+
+
+    <!-- PAUSA -->
+
+    <div id="pausePanel" class="panel hidden">
+
+        <div class="panelHeader">
+            <h2>PAUSADO</h2>
+        </div>
+
+        <button onclick="resumeGame()" class="largeButton">
+            CONTINUAR
+        </button>
+
+        <button onclick="backToMenu()" class="largeButton">
+            MENU PRINCIPAL
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     OPÇÕES
+========================= -->
+
+<div id="optionsPanel" class="modal hidden">
+
+    <div class="modalBox">
+
+        <h2>OPÇÕES</h2>
+
+        <p>Som</p>
+
+        <input
+            id="volumeControl"
+            type="range"
+            min="0"
+            max="100"
+            value="70"
+        >
+
+        <button onclick="closeModal()">VOLTAR</button>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     CONQUISTAS
+========================= -->
+
+<div id="achievementsPanel" class="modal hidden">
+
+    <div class="modalBox">
+
+        <h2>CONQUISTAS</h2>
+
+        <div class="achievement">
+            ⚔️ Primeiro Sangue
+            <small>Derrote seu primeiro inimigo.</small>
+        </div>
+
+        <div class="achievement">
+            💎 Colecionador
+            <small>Encontre 10 itens.</small>
+        </div>
+
+        <div class="achievement">
+            💍 Caçador de Relíquias
+            <small>Encontre seu primeiro amuleto.</small>
+        </div>
+
+        <div class="achievement">
+            👑 O Desafiante
+            <small>Enfrente o chefe.</small>
+        </div>
+
+        <button onclick="closeModal()">VOLTAR</button>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     EXTRAS
+========================= -->
+
+<div id="creditsPanel" class="modal hidden">
+
+    <div class="modalBox">
+
+        <h2>ECOS DE AETHER</h2>
+
+        <p>
+            Uma aventura criada em HTML, CSS e JavaScript.
+        </p>
+
+        <p>
+            Explore o mundo.<br>
+            Encontre relíquias.<br>
+            Derrote monstros.<br>
+            Descubra os segredos de Aether.
+        </p>
+
+        <button onclick="closeModal()">VOLTAR</button>
+
+    </div>
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+</html>

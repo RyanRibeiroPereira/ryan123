@@ -1,0 +1,1516 @@
+/* =====================================================
+   VALE SOMBRIO — STYLE.CSS
+   ===================================================== */
+
+:root {
+  --void: #07080a;
+  --panel: #111417;
+  --panel2: #171b1e;
+
+  --bone: #e9e4d6;
+  --dim: #aaa59b;
+  --muted: #706d68;
+
+  --line: rgba(233, 228, 214, .20);
+  --line-strong: rgba(233, 228, 214, .42);
+
+  --accent: #b8c7c2;
+  --glow: rgba(225, 235, 232, .55);
+}
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+
+  background: var(--void);
+  color: var(--bone);
+
+  font-family: "Cormorant Garamond", serif;
+}
+
+
+/* =====================================================
+   ELEMENTOS
+   ===================================================== */
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+
+/* =====================================================
+   FUNDO
+   ===================================================== */
+
+.background {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(122, 136, 140, .18),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 15% 80%,
+      rgba(46, 56, 61, .24),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      180deg,
+      #0b0d0f 0%,
+      #13171a 48%,
+      #070809 100%
+    );
+}
+
+
+/* =====================================================
+   LUA
+   ===================================================== */
+
+.moon {
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+
+  border-radius: 50%;
+
+  left: 50%;
+  top: -90px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle at 40% 40%,
+      #d9ddd7,
+      #a7aaa4 48%,
+      #555b58 100%
+    );
+
+  box-shadow:
+    0 0 80px rgba(205, 215, 210, .18);
+
+  opacity: .13;
+}
+
+
+/* =====================================================
+   NÉVOA
+   ===================================================== */
+
+.mist {
+  position: absolute;
+
+  width: 75vw;
+  height: 28vh;
+
+  filter: blur(35px);
+
+  opacity: .16;
+
+  border-radius: 50%;
+
+  background: #9ba7a7;
+}
+
+.mist-a {
+  left: -20%;
+  bottom: 15%;
+
+  animation:
+    drift 18s ease-in-out infinite alternate;
+}
+
+.mist-b {
+  right: -25%;
+  top: 35%;
+
+  animation:
+    drift 22s ease-in-out infinite alternate-reverse;
+}
+
+
+/* =====================================================
+   PARTÍCULAS
+   ===================================================== */
+
+.particles {
+  position: absolute;
+  inset: 0;
+
+  opacity: .5;
+
+  background-image:
+
+    radial-gradient(
+      circle at 12% 28%,
+      #d9ddd7 0 1px,
+      transparent 1.5px
+    ),
+
+    radial-gradient(
+      circle at 72% 18%,
+      #d9ddd7 0 1px,
+      transparent 1.5px
+    ),
+
+    radial-gradient(
+      circle at 45% 74%,
+      #d9ddd7 0 1px,
+      transparent 1.5px
+    ),
+
+    radial-gradient(
+      circle at 88% 62%,
+      #d9ddd7 0 1px,
+      transparent 1.5px
+    ),
+
+    radial-gradient(
+      circle at 31% 91%,
+      #d9ddd7 0 1px,
+      transparent 1.5px
+    );
+}
+
+
+/* =====================================================
+   VINHETA
+   ===================================================== */
+
+.vignette {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 190px 55px rgba(0, 0, 0, .88);
+
+  z-index: 5;
+}
+
+
+/* =====================================================
+   PALCO
+   ===================================================== */
+
+.stage {
+  position: relative;
+
+  z-index: 10;
+
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  padding: 32px 18px;
+}
+
+
+/* =====================================================
+   TELAS
+   ===================================================== */
+
+.screen {
+  display: none;
+
+  width: min(650px, 100%);
+
+  text-align: center;
+
+  animation:
+    appear .45s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+
+/* =====================================================
+   ANIMAÇÕES
+   ===================================================== */
+
+@keyframes appear {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(12px)
+      scale(.99);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes drift {
+
+  to {
+    transform:
+      translateX(90px)
+      translateY(-25px);
+  }
+}
+
+
+/* =====================================================
+   MENU PRINCIPAL
+   ===================================================== */
+
+.eyebrow {
+  font-family: "Cinzel", serif;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: .45em;
+
+  color: var(--muted);
+
+  margin-bottom: 8px;
+}
+
+
+.title {
+  font-family: "Cinzel", serif;
+
+  font-size: clamp(
+    42px,
+    8vw,
+    72px
+  );
+
+  font-weight: 800;
+
+  letter-spacing: .045em;
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 20px rgba(235, 240, 236, .38),
+    0 3px 4px #000;
+}
+
+
+.subtitle {
+  font-size: 19px;
+
+  color: var(--dim);
+
+  font-style: italic;
+
+  letter-spacing: .1em;
+
+  margin-top: 12px;
+}
+
+
+/* =====================================================
+   ORNAMENTO
+   ===================================================== */
+
+.ornament {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: min(330px, 70%);
+
+  margin:
+    34px auto
+    42px;
+
+  color: var(--bone);
+}
+
+.ornament span {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--line-strong)
+    );
+
+  flex: 1;
+}
+
+.ornament span:last-of-type {
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--line-strong),
+      transparent
+    );
+}
+
+.ornament i {
+  font-style: normal;
+
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   BOTÕES DO MENU
+   ===================================================== */
+
+.menu-list {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+
+  list-style: none;
+}
+
+
+.menu-item {
+  appearance: none;
+
+  background: none;
+
+  border: 0;
+
+  cursor: pointer;
+
+  position: relative;
+
+  min-width: 270px;
+
+  padding:
+    10px 25px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 21px;
+
+  font-weight: 600;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+
+  color: var(--dim);
+
+  transition:
+    .25s ease;
+}
+
+
+.menu-item:hover,
+.menu-item:focus-visible {
+
+  color: #fff;
+
+  text-shadow:
+    0 0 14px var(--glow);
+
+  transform:
+    translateY(-2px);
+}
+
+
+.menu-item.primary {
+  color: var(--bone);
+}
+
+
+/* =====================================================
+   ESTRELAS DOS BOTÕES
+   ===================================================== */
+
+.wing {
+
+  position: absolute;
+
+  opacity: 0;
+
+  transition:
+    .25s;
+
+  font-size: 13px;
+}
+
+
+.menu-item .wing:first-child {
+  left: 0;
+}
+
+
+.menu-item .wing:last-child {
+  right: 0;
+}
+
+
+.menu-item:hover .wing {
+  opacity: .9;
+}
+
+
+/* =====================================================
+   VERSÃO
+   ===================================================== */
+
+.version {
+
+  margin-top: 38px;
+
+  color: #55534f;
+
+  font-family: "Cinzel", serif;
+
+  font-size: 10px;
+
+  letter-spacing: .2em;
+}
+
+
+/* =====================================================
+   CONFIGURAÇÕES
+   ===================================================== */
+
+.sub-header {
+
+  font-family: "Cinzel", serif;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 16px
+    rgba(255,255,255,.28);
+}
+
+
+.screen-desc {
+
+  color: var(--dim);
+
+  font-size: 16px;
+
+  margin-top: 7px;
+}
+
+
+/* =====================================================
+   ABAS
+   ===================================================== */
+
+.tabs {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 34px;
+
+  margin:
+    25px 0
+    28px;
+}
+
+
+.tab {
+
+  padding:
+    7px 4px;
+
+  background: none;
+
+  border: 0;
+
+  cursor: pointer;
+
+  color: var(--dim);
+
+  font-family: "Cinzel", serif;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+
+  border-bottom:
+    1px solid transparent;
+
+  transition: .2s;
+}
+
+
+.tab:hover,
+.tab.active {
+
+  color: var(--bone);
+
+  border-color:
+    var(--line-strong);
+}
+
+
+/* =====================================================
+   CARD
+   ===================================================== */
+
+.card,
+.game-card {
+
+  border:
+    1px solid var(--line);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(0,0,0,.25)
+    );
+
+  box-shadow:
+    0 18px 60px
+    rgba(0,0,0,.3);
+
+  padding:
+    27px 34px;
+
+  text-align: left;
+
+  position: relative;
+}
+
+
+/* =====================================================
+   CANTOS DO CARD
+   ===================================================== */
+
+.card::before,
+.card::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 14px;
+  height: 14px;
+
+  border-color:
+    var(--line-strong);
+}
+
+
+.card::before {
+
+  left: -1px;
+  top: -1px;
+
+  border-left:
+    1px solid;
+
+  border-top:
+    1px solid;
+}
+
+
+.card::after {
+
+  right: -1px;
+  bottom: -1px;
+
+  border-right:
+    1px solid;
+
+  border-bottom:
+    1px solid;
+}
+
+
+/* =====================================================
+   PAINÉIS DAS ABAS
+   ===================================================== */
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+
+/* =====================================================
+   OPÇÕES
+   ===================================================== */
+
+.opt-row,
+.keyrow {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    15px 0;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.opt-row:last-child,
+.keyrow:last-child {
+
+  border-bottom: 0;
+}
+
+
+.opt-label {
+
+  font-size: 18px;
+
+  color: var(--bone);
+}
+
+
+.opt-sub {
+
+  font-size: 12.5px;
+
+  color: var(--muted);
+
+  font-style: italic;
+
+  margin-top: 3px;
+}
+
+
+/* =====================================================
+   SWITCH
+   ===================================================== */
+
+.switch {
+
+  width: 48px;
+  height: 23px;
+
+  border:
+    1px solid
+    var(--line-strong);
+
+  background: #080a0b;
+
+  cursor: pointer;
+
+  position: relative;
+
+  flex: 0 0 auto;
+}
+
+
+.switch span {
+
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  left: 4px;
+  top: 4px;
+
+  background: #777;
+
+  transform:
+    rotate(45deg);
+
+  transition: .2s;
+}
+
+
+.switch.on {
+
+  border-color:
+    var(--accent);
+}
+
+
+.switch.on span {
+
+  left: 29px;
+
+  background:
+    var(--bone);
+
+  box-shadow:
+    0 0 9px #fff;
+}
+
+
+/* =====================================================
+   SELECT
+   ===================================================== */
+
+.ghost-select {
+
+  background: #0c0f11;
+
+  border:
+    1px solid
+    var(--line-strong);
+
+  color: var(--bone);
+
+  padding:
+    7px 10px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   VOLUME
+   ===================================================== */
+
+.slider-row {
+
+  padding:
+    13px 0;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+
+.slider-row:last-child {
+  border: 0;
+}
+
+
+.slider-top {
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  margin-bottom:
+    9px;
+}
+
+
+.slider-val {
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 12px;
+
+  color: var(--accent);
+}
+
+
+input[type="range"] {
+
+  width: 100%;
+
+  accent-color:
+    var(--bone);
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   TECLAS
+   ===================================================== */
+
+.keychip {
+
+  min-width: 80px;
+
+  padding:
+    7px 12px;
+
+  border:
+    1px solid
+    var(--line-strong);
+
+  background:
+    #0b0d0e;
+
+  cursor: pointer;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 12px;
+
+  letter-spacing: .08em;
+
+  transition: .2s;
+}
+
+
+.keychip:hover,
+.keychip.listening {
+
+  border-color:
+    #fff;
+
+  color: #fff;
+
+  box-shadow:
+    0 0 12px
+    rgba(255,255,255,.12);
+}
+
+
+/* =====================================================
+   BOTÃO VOLTAR
+   ===================================================== */
+
+.back-link {
+
+  margin-top: 26px;
+
+  padding:
+    9px 20px;
+
+  color: var(--dim);
+
+  background: none;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 12px;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  border:
+    1px solid transparent;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+
+.back-link:hover {
+
+  color: #fff;
+
+  border-color:
+    var(--line);
+}
+
+
+/* =====================================================
+   TELA DO JOGO
+   ===================================================== */
+
+.game-screen {
+  text-align: left;
+}
+
+
+.game-top {
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+
+.small-label {
+
+  display: block;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 10px;
+
+  letter-spacing: .2em;
+
+  color: var(--muted);
+
+  margin-bottom: 3px;
+}
+
+
+.game-top strong {
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   BOTÃO FECHAR
+   ===================================================== */
+
+.icon-button {
+
+  width: 38px;
+  height: 38px;
+
+  border:
+    1px solid var(--line);
+
+  background:
+    #0b0d0f;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+
+.icon-button:hover {
+
+  border-color:
+    #fff;
+
+  transform:
+    rotate(90deg);
+}
+
+
+/* =====================================================
+   CARD DA AVENTURA
+   ===================================================== */
+
+.game-card {
+
+  text-align: center;
+
+  padding:
+    45px 35px;
+}
+
+
+.hero-icon {
+
+  font-size: 54px;
+
+  text-shadow:
+    0 0 25px
+    rgba(220,230,225,.35);
+
+  margin-bottom: 8px;
+
+  animation:
+    swordGlow 2.5s ease-in-out infinite;
+}
+
+
+@keyframes swordGlow {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-3deg);
+
+    filter:
+      drop-shadow(
+        0 0 4px
+        rgba(255,255,255,.2)
+      );
+  }
+
+  50% {
+    transform:
+      translateY(-5px)
+      rotate(3deg);
+
+    filter:
+      drop-shadow(
+        0 0 15px
+        rgba(255,255,255,.45)
+      );
+  }
+}
+
+
+.game-card h2 {
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 28px;
+
+  font-weight: 700;
+}
+
+
+.game-card p {
+
+  max-width: 520px;
+
+  margin:
+    13px auto
+    25px;
+
+  color: var(--dim);
+
+  font-size: 17px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   STATUS
+   ===================================================== */
+
+.stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 8px;
+
+  margin:
+    20px 0;
+}
+
+
+.stats div {
+
+  border:
+    1px solid var(--line);
+
+  padding:
+    12px 8px;
+
+  background:
+    rgba(0,0,0,.18);
+
+  transition: .2s;
+}
+
+
+.stats div:hover {
+
+  border-color:
+    var(--line-strong);
+
+  transform:
+    translateY(-2px);
+}
+
+
+.stats span {
+
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+
+.stats b {
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   BOTÃO DE AÇÃO
+   ===================================================== */
+
+.action-button {
+
+  border:
+    1px solid var(--line-strong);
+
+  background:
+    linear-gradient(
+      180deg,
+      #252a2d,
+      #111416
+    );
+
+  padding:
+    11px 25px;
+
+  cursor: pointer;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  transition: .25s;
+}
+
+
+.action-button:hover {
+
+  box-shadow:
+    0 0 20px
+    rgba(220,230,225,.13);
+
+  border-color:
+    #fff;
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* =====================================================
+   EXTRAS
+   ===================================================== */
+
+.extras-card {
+
+  max-width: 600px;
+
+  margin: auto;
+}
+
+
+.extra-line {
+
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  padding:
+    13px 0;
+
+  border-bottom:
+    1px solid var(--line);
+
+  gap: 20px;
+}
+
+
+.extra-line span {
+
+  color:
+    var(--muted);
+}
+
+
+.extra-line strong {
+
+  font-weight:
+    600;
+
+  text-align:
+    right;
+}
+
+
+.quote {
+
+  padding-top:
+    22px;
+
+  color:
+    var(--dim);
+
+  font-style:
+    italic;
+
+  text-align:
+    center;
+
+  font-size:
+    17px;
+}
+
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+
+.toast {
+
+  position: fixed;
+
+  z-index: 50;
+
+  left: 50%;
+
+  bottom: 28px;
+
+  transform:
+    translate(-50%, 20px);
+
+  padding:
+    10px 18px;
+
+  border:
+    1px solid
+    var(--line-strong);
+
+  background:
+    #0c0e10;
+
+  color:
+    var(--bone);
+
+  font-size:
+    14px;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    .25s;
+}
+
+
+.toast.show {
+
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+
+/* =====================================================
+   TEXTO NO CANTO
+   ===================================================== */
+
+.meta-corner {
+
+  position: fixed;
+
+  z-index: 20;
+
+  left: 20px;
+
+  bottom: 18px;
+
+  color: #555;
+
+  font-family:
+    "Cinzel",
+    serif;
+
+  font-size: 9px;
+
+  letter-spacing: .14em;
+
+  line-height: 1.7;
+}
+
+
+.meta-corner span {
+
+  color:
+    #41403e;
+}
+
+
+/* =====================================================
+   DESATIVAR EFEITOS
+   ===================================================== */
+
+body.no-effects .mist,
+body.no-effects .particles,
+body.no-effects .moon {
+
+  display: none;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .card,
+  .game-card {
+
+    padding:
+      22px 18px;
+  }
+
+
+  .tabs {
+
+    gap: 15px;
+
+    flex-wrap:
+      wrap;
+  }
+
+
+  .meta-corner {
+
+    display: none;
+  }
+
+
+  .menu-item {
+
+    min-width:
+      250px;
+  }
+
+
+  .opt-row,
+  .keyrow {
+
+    gap: 10px;
+  }
+
+
+  .opt-label {
+
+    font-size:
+      16px;
+  }
+
+
+  .stats {
+
+    grid-template-columns:
+      1fr;
+  }
+
+
+  .game-card h2 {
+
+    font-size:
+      23px;
+  }
+
+
+  .title {
+
+    font-size:
+      42px;
+  }
+}
+
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+::-webkit-scrollbar-track {
+  background:
+    #070809;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background:
+    #3d4242;
+
+  border-radius:
+    10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    #707676;
+}

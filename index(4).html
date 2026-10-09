@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vale Sombrio — Reino Esquecido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style(3).css">
+</head>
+<body>
+  <div class="background">
+    <div class="moon"></div>
+    <div class="mist mist-a"></div>
+    <div class="mist mist-b"></div>
+    <div class="particles"></div>
+  </div>
+  <div class="vignette"></div>
+
+  <main class="stage">
+    <!-- MENU PRINCIPAL -->
+    <section class="screen active" id="screen-main">
+      <div class="eyebrow">REINO ESQUECIDO</div>
+      <h1 class="title">Vale Sombrio</h1>
+      <p class="subtitle">Ecos de uma terra esquecida</p>
+
+      <div class="ornament"><span></span><i>✦</i><span></span></div>
+
+      <nav class="menu-list" aria-label="Menu principal">
+        <button class="menu-item primary" data-action="start">
+          <span class="wing">✦</span>Iniciar Partida<span class="wing">✦</span>
+        </button>
+        <button class="menu-item" data-goto="config">
+          <span class="wing">✦</span>Configurações<span class="wing">✦</span>
+        </button>
+        <button class="menu-item" data-action="extras">
+          <span class="wing">✦</span>Extras<span class="wing">✦</span>
+        </button>
+        <button class="menu-item" data-action="quit">
+          <span class="wing">✦</span>Sair do Jogo<span class="wing">✦</span>
+        </button>
+      </nav>
+
+      <div class="version">v1.1.0 • build 06.10.2026</div>
+    </section>
+
+    <!-- TELA DO JOGO / DEMO -->
+    <section class="screen game-screen" id="screen-game">
+      <div class="game-top">
+        <div>
+          <span class="small-label">LOCALIZAÇÃO</span>
+          <strong>Floresta do Véu</strong>
+        </div>
+        <button class="icon-button" data-goto="main" title="Voltar ao menu">✕</button>
+      </div>
+
+      <div class="game-card">
+        <div class="hero-icon">⚔</div>
+        <h2>O chamado despertou</h2>
+        <p>Esta é a entrada da aventura. O próximo passo é transformar esta tela no mapa jogável com personagem, inimigos, itens, amuletos e chefe.</p>
+        <div class="stats">
+          <div><span>❤ Vida</span><b>100 / 100</b></div>
+          <div><span>◆ Moedas</span><b>0</b></div>
+          <div><span>✦ Relíquias</span><b>0 / 30</b></div>
+        </div>
+        <button class="action-button" data-action="demo">Explorar a região</button>
+      </div>
+    </section>
+
+    <!-- CONFIGURAÇÕES -->
+    <section class="screen" id="screen-config">
+      <div class="sub-header">Configurações</div>
+      <p class="screen-desc">Personalize sua jornada.</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="geral">Geral</button>
+        <button class="tab" data-tab="som">Som</button>
+        <button class="tab" data-tab="controles">Controles</button>
+      </div>
+
+      <div class="card">
+        <div class="tab-panel active" id="tab-geral">
+          <div class="opt-row">
+            <div><div class="opt-label">Tela cheia</div><div class="opt-sub">Ocupa toda a extensão do monitor</div></div>
+            <button class="switch on" data-switch="fullscreen" aria-label="Tela cheia"><span></span></button>
+          </div>
+          <div class="opt-row">
+            <div><div class="opt-label">Efeitos visuais</div><div class="opt-sub">Névoa, partículas e brilho</div></div>
+            <button class="switch on" data-switch="effects" aria-label="Efeitos visuais"><span></span></button>
+          </div>
+          <div class="opt-row">
+            <div><div class="opt-label">Legendas</div><div class="opt-sub">Exibe textos importantes durante a aventura</div></div>
+            <button class="switch" data-switch="subtitles" aria-label="Legendas"><span></span></button>
+          </div>
+          <div class="opt-row">
+            <div><div class="opt-label">Idioma</div><div class="opt-sub">Idioma dos textos</div></div>
+            <select id="language" class="ghost-select">
+              <option value="pt">Português</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-som">
+          <div class="slider-row" data-volume="master">
+            <div class="slider-top"><span class="opt-label">Volume geral</span><b class="slider-val">80</b></div>
+            <input type="range" min="0" max="100" value="80">
+          </div>
+          <div class="slider-row" data-volume="music">
+            <div class="slider-top"><span class="opt-label">Música</span><b class="slider-val">60</b></div>
+            <input type="range" min="0" max="100" value="60">
+          </div>
+          <div class="slider-row" data-volume="sfx">
+            <div class="slider-top"><span class="opt-label">Efeitos sonoros</span><b class="slider-val">90</b></div>
+            <input type="range" min="0" max="100" value="90">
+          </div>
+          <div class="slider-row" data-volume="ambience">
+            <div class="slider-top"><span class="opt-label">Ambiente</span><b class="slider-val">45</b></div>
+            <input type="range" min="0" max="100" value="45">
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-controles">
+          <div class="keyrow"><span class="opt-label">Mover para cima</span><button class="keychip" data-key="up">W</button></div>
+          <div class="keyrow"><span class="opt-label">Mover para baixo</span><button class="keychip" data-key="down">S</button></div>
+          <div class="keyrow"><span class="opt-label">Mover para esquerda</span><button class="keychip" data-key="left">A</button></div>
+          <div class="keyrow"><span class="opt-label">Mover para direita</span><button class="keychip" data-key="right">D</button></div>
+          <div class="keyrow"><span class="opt-label">Saltar</span><button class="keychip" data-key="jump">Espaço</button></div>
+          <div class="keyrow"><span class="opt-label">Atacar</span><button class="keychip" data-key="attack">K</button></div>
+          <div class="keyrow"><span class="opt-label">Dash</span><button class="keychip" data-key="dash">Shift</button></div>
+          <div class="keyrow"><span class="opt-label">Mapa</span><button class="keychip" data-key="map">Tab</button></div>
+        </div>
+      </div>
+
+      <button class="back-link" data-goto="main">◄ Voltar</button>
+    </section>
+
+    <!-- EXTRAS -->
+    <section class="screen" id="screen-extras">
+      <div class="sub-header">Extras</div>
+      <p class="screen-desc">Informações sobre o projeto.</p>
+      <div class="card extras-card">
+        <div class="extra-line"><span>Projeto</span><strong>Vale Sombrio</strong></div>
+        <div class="extra-line"><span>Estilo</span><strong>RPG de ação 2D</strong></div>
+        <div class="extra-line"><span>Visual</span><strong>Fantasia sombria / Pixel Art</strong></div>
+        <div class="extra-line"><span>Versão</span><strong>1.1.0</strong></div>
+        <div class="quote">“Toda lenda começa com alguém disposto a entrar na escuridão.”</div>
+      </div>
+      <button class="back-link" data-goto="main">◄ Voltar</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <div class="meta-corner">VALE SOMBRIO<br><span>ESTÚDIO FICTÍCIO</span></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

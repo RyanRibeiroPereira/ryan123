@@ -1514,3 +1514,531 @@ body.no-effects .moon {
   background:
     #707676;
 }
+
+/* =====================================================
+   ARTE DE FUNDO DO MENU (vila à noite)
+   ===================================================== */
+
+.bg-art {
+  position: absolute;
+  inset: -2%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 6, 8, .55) 0%,
+      rgba(5, 6, 8, .25) 45%,
+      rgba(5, 6, 8, .7) 100%
+    ),
+    url("assets/vila.jpg") center / cover no-repeat;
+
+  filter:
+    saturate(.8)
+    brightness(.7)
+    blur(1.2px);
+
+  opacity: .85;
+
+  transition: opacity .8s ease;
+
+  animation:
+    artDrift 40s ease-in-out infinite alternate;
+}
+
+@keyframes artDrift {
+
+  from {
+    transform: scale(1.02) translate(0, 0);
+  }
+
+  to {
+    transform: scale(1.08) translate(-1.2%, -.8%);
+  }
+}
+
+/* a vila já tem a sua própria lua, então a lua em CSS fica escondida */
+.moon {
+  display: none;
+}
+
+/* dentro do jogo o fundo do menu fica quase apagado */
+body[data-screen="game"] .bg-art {
+  opacity: .18;
+}
+
+
+/* =====================================================
+   TELA DE CARREGAMENTO
+   ===================================================== */
+
+.loading {
+  position: fixed;
+  inset: 0;
+
+  z-index: 100;
+
+  display: grid;
+  place-items: end center;
+
+  background: #040506;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .7s ease,
+    visibility .7s;
+}
+
+.loading.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-art {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  animation:
+    loadingDrift 26s ease-in-out infinite alternate;
+}
+
+@keyframes loadingDrift {
+
+  from {
+    transform: scale(1.01);
+  }
+
+  to {
+    transform: scale(1.07) translateX(-1%);
+  }
+}
+
+.loading-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, .3) 0%,
+      transparent 26%,
+      transparent 48%,
+      rgba(0, 0, 0, .88) 100%
+    ),
+    radial-gradient(
+      ellipse at 50% 55%,
+      transparent 45%,
+      rgba(0, 0, 0, .6) 100%
+    );
+}
+
+.loading-panel {
+  position: relative;
+
+  width: min(560px, 86vw);
+
+  padding-bottom: clamp(26px, 6vh, 54px);
+
+  text-align: center;
+}
+
+.loading-title {
+  font-family: "Cinzel", serif;
+
+  font-size: clamp(30px, 5vw, 46px);
+
+  font-weight: 700;
+
+  letter-spacing: .08em;
+
+  line-height: 1.1;
+
+  text-shadow:
+    0 0 20px rgba(235, 240, 236, .35),
+    0 3px 4px #000;
+}
+
+.loading-track {
+  --p: 0;
+
+  position: relative;
+
+  margin-top: 62px;
+}
+
+.loading-bar {
+  height: 3px;
+
+  background: rgba(233, 228, 214, .16);
+}
+
+.loading-bar i {
+  display: block;
+
+  height: 100%;
+
+  width: calc(var(--p) * 100%);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(184, 199, 194, .25),
+      var(--bone)
+    );
+
+  box-shadow:
+    0 0 12px var(--glow);
+}
+
+/* o herói andando em cima da barra (usa a folha de sprites de andar) */
+.loading-hero {
+  position: absolute;
+
+  left: calc(var(--p) * 100%);
+  bottom: -4px;
+
+  width: 61px;
+  height: 77px;
+
+  transform: translateX(-50%);
+
+  background:
+    url("assets/andar.png") 0 0 / 488px 231px no-repeat;
+
+  animation:
+    heroWalk .85s steps(8) infinite;
+
+  filter:
+    drop-shadow(0 0 6px rgba(225, 235, 232, .22));
+}
+
+@keyframes heroWalk {
+
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: -488px;
+  }
+}
+
+.loading-meta {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 12px;
+
+  font-family: "Cinzel", serif;
+
+  font-size: 11px;
+
+  letter-spacing: .24em;
+
+  text-transform: uppercase;
+
+  color: var(--dim);
+}
+
+.loading-meta b {
+  color: var(--bone);
+
+  font-weight: 600;
+}
+
+.loading-tip {
+  min-height: 2.6em;
+
+  margin-top: 20px;
+
+  color: var(--dim);
+
+  font-size: 17px;
+
+  font-style: italic;
+
+  line-height: 1.4;
+
+  transition: opacity .4s ease;
+}
+
+.loading-tip.fade {
+  opacity: 0;
+}
+
+
+/* =====================================================
+   TELA DO JOGO — HUD E CANVAS
+   ===================================================== */
+
+.game-screen {
+  width: min(1120px, 100%);
+}
+
+.game-top {
+  gap: 16px;
+}
+
+.hud-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.portrait {
+  width: 46px;
+  height: 46px;
+
+  object-fit: cover;
+
+  border: 1px solid var(--line-strong);
+
+  background: #0b0d0f;
+
+  box-shadow:
+    0 0 14px rgba(0, 0, 0, .6);
+}
+
+.hud-stats {
+  display: flex;
+
+  align-items: stretch;
+
+  gap: 8px;
+
+  margin-left: auto;
+}
+
+.hud-stat {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  min-width: 92px;
+
+  padding: 6px 12px;
+
+  border: 1px solid var(--line);
+
+  background: rgba(0, 0, 0, .3);
+
+  text-align: left;
+}
+
+.hud-stat span {
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.hud-stat b {
+  font-family: "Cinzel", serif;
+
+  font-size: 12px;
+}
+
+.hud-life {
+  min-width: 128px;
+}
+
+.hud-bar {
+  height: 4px;
+
+  background: rgba(233, 228, 214, .14);
+}
+
+.hud-bar i {
+  display: block;
+
+  height: 100%;
+
+  width: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7d3b3b,
+      #c9857b
+    );
+
+  transition: width .3s ease;
+}
+
+.game-view {
+  position: relative;
+
+  /* o canvas tem proporção 960 x 700: nunca passa da altura da janela */
+  width: min(100%, calc((100vh - 170px) * 16 / 9));
+
+  margin: 0 auto;
+
+  border: 1px solid var(--line-strong);
+
+  background: #05070b;
+
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, .55);
+}
+
+.game-view canvas {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  image-rendering: auto;
+}
+
+.game-hint {
+  position: absolute;
+
+  left: 50%;
+  bottom: 12px;
+
+  transform: translateX(-50%);
+
+  padding: 6px 14px;
+
+  border: 1px solid var(--line);
+
+  background: rgba(5, 6, 8, .62);
+
+  color: var(--dim);
+
+  font-family: "Cinzel", serif;
+
+  font-size: 10.5px;
+
+  letter-spacing: .12em;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+
+  transition: opacity 1.2s ease;
+}
+
+.game-hint.faded {
+  opacity: .28;
+}
+
+@media (max-width: 760px) {
+
+  .game-top {
+    flex-wrap: wrap;
+  }
+
+  .hud-stats {
+    order: 3;
+
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+  .hud-stat {
+    flex: 1;
+
+    min-width: 0;
+  }
+
+  .game-hint {
+    display: none;
+  }
+
+  .game-view {
+    width: 100%;
+  }
+}
+
+
+/* =====================================================
+   JOGO EM TELA CHEIA
+   A tela do jogo ocupa a janela inteira: barra do HUD em cima e o canvas
+   (ajustado pelo script.js, sempre 16:9) preenchendo o resto.
+   ===================================================== */
+
+body[data-screen="game"] .stage {
+  display: block;
+
+  padding: 0;
+}
+
+body[data-screen="game"] .meta-corner {
+  display: none;
+}
+
+.screen.game-screen.active {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 100vw;
+  max-width: none;
+
+  height: 100vh;
+  height: 100dvh;
+}
+
+.game-screen .game-top {
+  flex: 0 0 auto;
+
+  margin: 0;
+
+  padding: 8px 16px;
+
+  background: rgba(5, 6, 8, .9);
+
+  border-bottom: 1px solid var(--line);
+}
+
+.game-screen .game-view {
+  flex: 1 1 0;
+
+  min-height: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border: 0;
+
+  box-shadow: none;
+
+  background: #000;
+}
+
+/* o tamanho do canvas é definido pelo script.js (função fit) */
+.game-screen .game-view canvas {
+  flex: 0 0 auto;
+
+  width: auto;
+  height: auto;
+
+  aspect-ratio: auto;
+}
